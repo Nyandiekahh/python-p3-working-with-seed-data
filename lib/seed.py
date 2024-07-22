@@ -1,16 +1,33 @@
-#!/usr/bin/env python3
-
-from faker import Faker
-import random
+# lib/seed.py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from models import Base, Game
+from faker import Faker
+import random
 
-from models import Game
+# Create an engine and a session
+engine = create_engine('sqlite:///migrations_test.db')
+Session = sessionmaker(bind=engine)
+session = Session()
 
+# Clear the database
+session.query(Game).delete()
+session.commit()
+
+# Add seed data
 fake = Faker()
 
-if __name__ == '__main__':
-    
-    engine = create_engine('sqlite:///seed_db.db')
-    Session = sessionmaker(bind=engine)
-    session = Session()
+games = [
+    Game(
+        title=fake.name(),
+        genre=fake.word(),
+        platform=fake.word(),
+        price=random.randint(0, 60)
+    )
+    for _ in range(50)
+]
+
+session.bulk_save_objects(games)
+session.commit()
+
+print("Database seeded!")

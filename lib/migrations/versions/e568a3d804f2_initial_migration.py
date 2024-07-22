@@ -1,8 +1,8 @@
-"""Add table games
+"""Initial migration
 
-Revision ID: 3cf5ba457650
-Revises: 767d9ccb2dd1
-Create Date: 2022-08-09 17:15:35.133384
+Revision ID: e568a3d804f2
+Revises: 
+Create Date: 2024-07-22 04:57:24.804634
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3cf5ba457650'
-down_revision = '767d9ccb2dd1'
+revision = 'e568a3d804f2'
+down_revision = None
 branch_labels = None
 depends_on = None
 
